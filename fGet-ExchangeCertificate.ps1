@@ -50,7 +50,7 @@ Function fGet-ExchangeCertificate {
 	
 	# Create new Exchange PS-Session using HTTPS Method, if no Exchange PS-Session exists
 	If (!(Get-PsSession | where {($_.ConfigurationName -eq "Microsoft.Exchange") -AND ($_.State -eq "Opened")})) {
-		[String[]]$ExchangeConnectionSequence = @('OUTLOOK','MAIL','SERVER1','SERVER2','SERVER3','SERVER4')
+		[String[]]$ExchangeConnectionSequence = @("$($Servers[0])","$($Servers[1])","$($Servers[2])","OUTLOOK","MAIL")
 		ForEach ($ExchangeConnection in $ExchangeConnectionSequence) {
 			Write-Host "`nTry to to connect to Exchange Server `'https://$ExchangeConnection.$([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().Name)/PowerShell`'" -f White
 			Try {
